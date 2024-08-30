@@ -8,14 +8,40 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 24),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            TextField(),
+            Container(
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                color: Color(0xFFF7F7FC),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              child: TextField(
+                keyboardType: TextInputType.number,
+                decoration: InputDecoration(
+                  hintText: "E-mail",
+                  hintStyle: TextStyle(),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
             SizedBox(height: 12),
-            TextField(),
+            Container(
+              color: Color(0xFFF7F7FC),
+              padding: EdgeInsets.all(8),
+              child: TextField(
+                obscureText: true,
+                decoration: InputDecoration(
+                  hintText: "Password",
+                  hintStyle: TextStyle(),
+                  border: InputBorder.none,
+                ),
+              ),
+            ),
             Container(
               margin: EdgeInsets.only(top: 68),
               width: MediaQuery.of(context).size.width,
@@ -33,8 +59,10 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             TextButton(
-              onPressed: () {},
-              child: Text("Don't have a account? Create one."),
+              onPressed: () {
+                Navigator.pushNamed(context, '/new-account');
+              },
+              child: Text("Don't have an account? Create one."),
             )
           ],
         ),

@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'login.page.dart';
+import 'newaccount.page.dart';
 
 class ChatFatecApp extends StatelessWidget {
 
@@ -11,6 +12,7 @@ class ChatFatecApp extends StatelessWidget {
       theme: ThemeData(useMaterial3: true),
       routes: {
         "/login": (context) => LoginPage(),
+        "/new-account": (context) => NewAccountPage(),
       },
       initialRoute: "/login",
     );
