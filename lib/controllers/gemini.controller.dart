@@ -1,7 +1,7 @@
 import 'package:google_generative_ai/google_generative_ai.dart';
 
 class GeminiController {
-  static const String apiKey = 'AIzaSyDTYKEEx6eJYBnlU6szz-KbQ3kUt1RaFNU';
+  static const String apiKey = '';
 
   Future<String?> chat(String message) async {
     final model = GenerativeModel(

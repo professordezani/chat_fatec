@@ -210,7 +210,7 @@ class ReceivedMessage extends StatelessWidget {
                         bottomRight: Radius.circular(16),
                       ),
                     ),
-                    child: Markdown(
+                    child: MarkdownBody(
                       selectable: true,
                       data: text,
                     )
