@@ -5,6 +5,10 @@ import 'package:flutter/material.dart';
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
 
+    void _signIn(BuildContext context) {
+    Navigator.pushNamed(context, '/chat');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +21,7 @@ class LoginPage extends StatelessWidget {
             Container(
               padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
-                color: Color(0xFFF7F7FC),
+                color: Color.fromARGB(227, 235, 235, 244),
                 borderRadius: BorderRadius.circular(4),
               ),
               child: TextField(
@@ -31,7 +35,10 @@ class LoginPage extends StatelessWidget {
             ),
             SizedBox(height: 12),
             Container(
-              color: Color(0xFFF7F7FC),
+              decoration: BoxDecoration(
+                color: Color.fromARGB(227, 235, 235, 244),
+                borderRadius: BorderRadius.circular(4),
+              ),
               padding: EdgeInsets.all(8),
               child: TextField(
                 obscureText: true,
@@ -47,7 +54,7 @@ class LoginPage extends StatelessWidget {
               width: MediaQuery.of(context).size.width,
               child: ElevatedButton(
                 style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all(Color(0xFF002DE3)),
+                  backgroundColor: WidgetStateProperty.all(Color(0xFF002DE3)),
                 ),
                 child: Text(
                   "Login",
@@ -55,7 +62,7 @@ class LoginPage extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () => _signIn(context),
               ),
             ),
             TextButton(

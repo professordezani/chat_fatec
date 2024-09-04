@@ -6,6 +6,10 @@ import 'package:flutter/material.dart';
 class NewAccountPage extends StatelessWidget {
   const NewAccountPage({super.key});
 
+  void _register(BuildContext context) {
+    Navigator.pushNamed(context, '/chat');
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,28 +25,27 @@ class NewAccountPage extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Container(
-                  width: 100,
-                  height: 100,
-                  margin: EdgeInsets.only(bottom: 32),
-                  decoration: BoxDecoration(
-                    color: Color(0xFFF7F7FC),
-                    borderRadius: BorderRadius.circular(50),
-                  ),
-                  child: Stack(
-                    children: [
-                      Center(child: Icon(Icons.person_outline, size: 56)),
-                      Positioned(
-                        child: Icon(Icons.add_circle, size: 24),
-                        bottom: 0,
-                        right: 1,
-                      ),
-                    ],
-                  )
-                ),
+                    width: 100,
+                    height: 100,
+                    margin: EdgeInsets.only(bottom: 32),
+                    decoration: BoxDecoration(
+                      color: Color.fromARGB(227, 235, 235, 244),
+                      borderRadius: BorderRadius.circular(50),
+                    ),
+                    child: Stack(
+                      children: [
+                        Center(child: Icon(Icons.person_outline, size: 56)),
+                        Positioned(
+                          child: Icon(Icons.add_circle, size: 24),
+                          bottom: 2,
+                          right: 2,
+                        ),
+                      ],
+                    )),
                 Container(
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Color(0xFFF7F7FC),
+                    color: Color.fromARGB(227, 235, 235, 244),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: TextField(
@@ -58,7 +61,7 @@ class NewAccountPage extends StatelessWidget {
                 Container(
                   padding: EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Color(0xFFF7F7FC),
+                    color: Color.fromARGB(227, 235, 235, 244),
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: TextField(
@@ -72,7 +75,10 @@ class NewAccountPage extends StatelessWidget {
                 ),
                 SizedBox(height: 12),
                 Container(
-                  color: Color(0xFFF7F7FC),
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(227, 235, 235, 244),
+                    borderRadius: BorderRadius.circular(4),
+                  ),
                   padding: EdgeInsets.all(8),
                   child: TextField(
                     obscureText: true,
@@ -88,7 +94,8 @@ class NewAccountPage extends StatelessWidget {
                   width: MediaQuery.of(context).size.width,
                   child: ElevatedButton(
                     style: ButtonStyle(
-                      backgroundColor: MaterialStateProperty.all(Color(0xFF002DE3)),
+                      backgroundColor:
+                          WidgetStateProperty.all(Color(0xFF002DE3)),
                     ),
                     child: Text(
                       "Save",
@@ -96,7 +103,7 @@ class NewAccountPage extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () => _register(context),
                   ),
                 )
               ],
