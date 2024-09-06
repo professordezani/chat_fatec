@@ -55,7 +55,9 @@ class LoginPage extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushReplacementNamed(context, '/chats');
+                },
               ),
             ),
             TextButton(
