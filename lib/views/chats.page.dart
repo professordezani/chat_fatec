@@ -43,35 +43,66 @@ class ChatsPage extends StatelessWidget {
           Flexible(
             child: ListView(
               children: [
-                ListTile(
-                  leading: Container(
-                    width: 48,
-                    height: 48,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        image: DecorationImage(
-                            image: NetworkImage('https://picsum.photos/200'))),
-                  ),
-                  title: Text("Fulano"),
-                  subtitle: Text("Bom dia. Dormiu bem?"),
-                  trailing: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("Now"),
-                      Container(
-                        child: Text("1"),
-                        margin: EdgeInsets.only(top: 10),
-                        padding:
-                            EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(40),
-                            color: Color(0xFFD2D5F9)),
-                      ),
-                    ],
-                  ),
-                ),
+                ChatsItem(
+                  userName: 'Ciclano',
+                  lastMessage: 'Bom dia! Dormiu bem?',
+                  date: DateTime.now(),
+                  amount: 2,
+                 ),
+                ChatsItem(
+                  userName: 'Beltrano',
+                  lastMessage: 'Bom dia! Dormiu bem?',
+                  date: DateTime.now(),
+                  amount: 5,
+                 ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ChatsItem extends StatelessWidget {
+  
+  final String userName;
+  final String lastMessage;
+  final DateTime date;
+  final int amount;
+
+  ChatsItem({
+    required this.userName, 
+    required this.lastMessage,
+    required this.date,
+    required this.amount
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return ListTile(
+      leading: Container(
+        width: 48,
+        height: 48,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(16),
+            image: DecorationImage(
+                image: NetworkImage('https://picsum.photos/200'))),
+      ),
+      title: Text(this.userName),
+      subtitle: Text(this.lastMessage),
+      trailing: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text("Now"),
+          Container(
+            child: Text(this.amount.toString()),
+            margin: EdgeInsets.only(top: 10),
+            padding:
+                EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(40),
+                color: Color(0xFFD2D5F9)),
           ),
         ],
       ),
