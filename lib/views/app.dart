@@ -1,9 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:chat_fatec/views/chats.page.dart';
 import 'package:flutter/material.dart';
 import 'login.page.dart';
 import 'newaccount.page.dart';
+import 'chats.page.dart';
+import 'chat.page.dart';
 
 class ChatFatecApp extends StatelessWidget {
 
@@ -16,6 +17,7 @@ class ChatFatecApp extends StatelessWidget {
         "/login": (context) => LoginPage(),
         "/new-account": (context) => NewAccountPage(),
         "/chats":(context) => ChatsPage(),
+        "/chat":(context) => ChatPage(),
       },
       initialRoute: "/login",
     );
