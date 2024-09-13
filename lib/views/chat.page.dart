@@ -1,4 +1,4 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +15,16 @@ class ChatPage extends StatelessWidget {
       body: Column(
         children: [
           Flexible(
-            child: ListView(),
+            child: ListView(
+              reverse: true,
+              children: [
+                ReceivedMessage(),
+                SentMessage(),
+                SentMessage(),
+                ReceivedMessage(),
+                SentMessage()
+              ],
+            ),
           ),
           Container(
             decoration: BoxDecoration(
@@ -35,6 +44,8 @@ class ChatPage extends StatelessWidget {
                         color: Color(0xFFF7F7FC),
                       ),
                       child: TextField(
+                        maxLines: 5,
+                        minLines: 1,
                         decoration: InputDecoration(
                           border: InputBorder.none,
                           hintText: "Good morning",
@@ -49,6 +60,88 @@ class ChatPage extends StatelessWidget {
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class ReceivedMessage extends StatelessWidget {
+  const ReceivedMessage({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerLeft,
+      child: Container(
+        margin: EdgeInsets.only(bottom: 12, left: 16, right: 60),
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Colors.lightGreen[100],
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
+            bottomRight: Radius.circular(16),
+          )
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text("Good morning, did you sleep well? Good morning, did you sleep well?"), 
+            SizedBox(height: 4,),
+            Text("09:45")
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SentMessage extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Container(
+        margin: EdgeInsets.only(bottom: 12, left: 60, right: 16),
+        padding: const EdgeInsets.all(10),
+        decoration: BoxDecoration(
+          color: Color(0xFF002DE3),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
+            bottomLeft: Radius.circular(16),
+          )
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
+            // Text("K, I'm on my way", style: TextStyle(color: Colors.white),),
+            Container(
+              width: 150,
+              child: Row(
+                children: [
+                  IconButton(
+                    icon: Icon(Icons.play_arrow,
+                    color: Colors.white,
+                   ),
+                   onPressed: () {},
+                   ),
+                  Expanded(
+                    child: LinearProgressIndicator(
+                      value: 0.6,
+                      color: Colors.red,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 4,),
+            Text("09:45", style: TextStyle(color: Colors.white),)
+          ],
+        ),
       ),
     );
   }
