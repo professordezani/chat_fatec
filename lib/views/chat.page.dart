@@ -20,7 +20,7 @@ class ChatPage extends StatelessWidget {
               children: [
                 ReceivedMessage(),
                 SentMessage(),
-                SentMessage(),
+                SentAudioMessage(),
                 ReceivedMessage(),
                 SentMessage()
               ],
@@ -118,27 +118,67 @@ class SentMessage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            // Text("K, I'm on my way", style: TextStyle(color: Colors.white),),
+            Text("K, I'm on my way", style: TextStyle(color: Colors.white),),
+            
+            SizedBox(height: 4,),
+            Text("09:45", style: TextStyle(color: Colors.white),)
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class SentAudioMessage extends StatelessWidget {
+
+  @override
+  Widget build(BuildContext context) {
+    return Align(
+      alignment: Alignment.centerRight,
+      child: Container(
+        // width: 160,
+        margin: EdgeInsets.only(bottom: 12, left: 60, right: 16),
+        padding: const EdgeInsets.all(4),
+        decoration: BoxDecoration(
+          color: Color(0xFF002DE3),
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16),
+            topRight: Radius.circular(16),
+            bottomLeft: Radius.circular(16),
+          )
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.end,
+          children: [
             Container(
+              margin: EdgeInsets.fromLTRB(10, 10, 6, 4),
+              padding: const EdgeInsets.only(right: 8),
+              decoration: BoxDecoration(
+                color: Color(0xFF375FFF),
+                borderRadius: BorderRadius.circular(8)
+              ),
               width: 150,
               child: Row(
                 children: [
                   IconButton(
-                    icon: Icon(Icons.play_arrow,
-                    color: Colors.white,
-                   ),
-                   onPressed: () {},
-                   ),
+                    visualDensity: VisualDensity.compact,
+                    icon: Icon(
+                      Icons.pause,
+                      color: Colors.white,
+                    ),
+                    onPressed: () {},
+                  ),
                   Expanded(
                     child: LinearProgressIndicator(
-                      value: 0.6,
+                      minHeight: 5,
+                      value: 0.25,
                       color: Colors.red,
+                      valueColor:  AlwaysStoppedAnimation<Color>(Colors.blue),
                     ),
                   ),
                 ],
               ),
             ),
-            SizedBox(height: 4,),
             Text("09:45", style: TextStyle(color: Colors.white),)
           ],
         ),
