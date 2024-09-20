@@ -2,9 +2,31 @@
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class NewAccountPage extends StatelessWidget {
-  const NewAccountPage({super.key});
+
+  final txtName = TextEditingController();
+  final txtEmail = TextEditingController();
+  final txtPassword = TextEditingController();
+
+
+  Future<void> createUser(BuildContext context) async {
+    try {
+      await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(
+          email: txtEmail.text,
+          password: txtPassword.text,
+        );
+    }
+    on FirebaseAuthException catch (ex) {
+      var snackBar = SnackBar(
+        content: Text(ex.message ?? 'Erro inesperado.'),
+        backgroundColor: Colors.red,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -46,6 +68,7 @@ class NewAccountPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: TextField(
+                    controller: txtName,
                     keyboardType: TextInputType.name,
                     decoration: InputDecoration(
                       hintText: "Name",
@@ -62,6 +85,7 @@ class NewAccountPage extends StatelessWidget {
                     borderRadius: BorderRadius.circular(4),
                   ),
                   child: TextField(
+                    controller: txtEmail,
                     keyboardType: TextInputType.emailAddress,
                     decoration: InputDecoration(
                       hintText: "E-mail",
@@ -75,6 +99,7 @@ class NewAccountPage extends StatelessWidget {
                   color: Color(0xFFF7F7FC),
                   padding: EdgeInsets.all(8),
                   child: TextField(
+                    controller: txtPassword,
                     obscureText: true,
                     decoration: InputDecoration(
                       hintText: "Password",
@@ -96,7 +121,7 @@ class NewAccountPage extends StatelessWidget {
                         color: Colors.white,
                       ),
                     ),
-                    onPressed: () {},
+                    onPressed: () => createUser(context),
                   ),
                 )
               ],
