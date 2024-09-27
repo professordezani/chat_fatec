@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,11 +15,20 @@ class NewAccountPage extends StatelessWidget {
 
   Future<void> createUser(BuildContext context) async {
     try {
-      await FirebaseAuth.instance
+      var userCredential = await FirebaseAuth.instance
         .createUserWithEmailAndPassword(
           email: txtEmail.text,
           password: txtPassword.text,
         );
+
+      await userCredential.user!.updateDisplayName(txtName.text);
+      // await userCredential.user!.updatePhoneNumber(txtPhone.text);
+      // await userCredential.user!.updatePhotoURL(photo_url_from_storage);
+      // await userCredential.user.delete();
+
+      Navigator.of(context)
+        ..pop()
+        ..pushReplacementNamed('/chats');
     }
     on FirebaseAuthException catch (ex) {
       var snackBar = SnackBar(

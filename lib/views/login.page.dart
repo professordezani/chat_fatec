@@ -1,9 +1,33 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class LoginPage extends StatelessWidget {
-  const LoginPage({super.key});
+  final txtEmail = TextEditingController();
+  final txtPassword = TextEditingController();
+
+
+  Future<void> signIn(BuildContext context) async {
+    try {
+      
+      // FirebaseAuth.instance.sendPasswordResetEmail(email: txtEmail.text);
+      await FirebaseAuth.instance
+        .signInWithEmailAndPassword(
+          email: txtEmail.text,
+          password: txtPassword.text,
+        );
+
+      Navigator.pushReplacementNamed(context, '/chats');
+    }
+    on FirebaseAuthException catch (ex) {
+      var snackBar = SnackBar(
+        content: Text(ex.message ?? 'Erro inesperado.'),
+        backgroundColor: Colors.red,
+      );
+      ScaffoldMessenger.of(context).showSnackBar(snackBar);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +45,8 @@ class LoginPage extends StatelessWidget {
                 borderRadius: BorderRadius.circular(4),
               ),
               child: TextField(
-                keyboardType: TextInputType.number,
+                controller: txtEmail,
+                keyboardType: TextInputType.emailAddress,
                 decoration: InputDecoration(
                   hintText: "E-mail",
                   hintStyle: TextStyle(),
@@ -34,6 +59,7 @@ class LoginPage extends StatelessWidget {
               color: Color(0xFFF7F7FC),
               padding: EdgeInsets.all(8),
               child: TextField(
+                controller: txtPassword,
                 obscureText: true,
                 decoration: InputDecoration(
                   hintText: "Password",
@@ -55,9 +81,7 @@ class LoginPage extends StatelessWidget {
                     color: Colors.white,
                   ),
                 ),
-                onPressed: () {
-                  Navigator.pushReplacementNamed(context, '/chats');
-                },
+                onPressed: () => signIn(context),
               ),
             ),
             TextButton(
