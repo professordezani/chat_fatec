@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ChatsPage extends StatelessWidget {
@@ -17,7 +18,8 @@ class ChatsPage extends StatelessWidget {
           ),
           IconButton(
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/login');
+              FirebaseAuth.instance.signOut();
+              // Navigator.pushReplacementNamed(context, '/login');
             },
             icon: Icon(Icons.logout),
           ),

@@ -23,7 +23,6 @@ class ChatPage extends StatelessWidget {
     await firestore.collection('messages').add(doc);
 
     txtMessage.clear();
-
   }
 
   @override
@@ -31,26 +30,38 @@ class ChatPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xFFF7F7FC),
       appBar: AppBar(
-        title: Text("Fulano"),
+        title: Text("Chat"),
       ),
       body: Column(
         children: [
           Flexible(
-            child: ListView(
-              reverse: true,
-              children: [
-                ReceivedMessage(),
-                SentMessage(),
-                SentAudioMessage(),
-                ReceivedMessage(),
-                SentMessage()
-              ],
+            child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+              stream: firestore.collection('messages').snapshots(),
+              builder: (context, snapshot) {
+
+                if(!snapshot.hasData)
+                  return Center(child:CircularProgressIndicator());
+
+                final documents = snapshot.data!.docs;
+
+                return ListView(
+                  children: documents.map((doc) {
+                    if(user.uid == doc['uid']) 
+                    {
+                      return SentMessage(doc['message'], doc['timestamp'].toDate());
+                    }
+                    else
+                    {
+                      return ReceivedMessage(doc['message'], doc['timestamp'].toDate());
+                    }
+                  }).toList(),
+                );
+              }
             ),
           ),
           Container(
             decoration: BoxDecoration(
               color: Colors.white,
-
             ),
             child: Container(
               padding: const EdgeInsets.symmetric(vertical: 10),
@@ -91,9 +102,10 @@ class ChatPage extends StatelessWidget {
 }
 
 class ReceivedMessage extends StatelessWidget {
-  const ReceivedMessage({
-    super.key,
-  });
+  final String message;
+  final DateTime timestamp;
+
+  ReceivedMessage(this.message, this.timestamp);
 
   @override
   Widget build(BuildContext context) {
@@ -113,9 +125,9 @@ class ReceivedMessage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text("Good morning, did you sleep well? Good morning, did you sleep well?"), 
+            Text(this.message), 
             SizedBox(height: 4,),
-            Text("09:45")
+            Text( this.timestamp.toIso8601String())
           ],
         ),
       ),
@@ -124,6 +136,11 @@ class ReceivedMessage extends StatelessWidget {
 }
 
 class SentMessage extends StatelessWidget {
+
+  final String message;
+  final DateTime timestamp;
+
+  SentMessage(this.message, this.timestamp);
 
   @override
   Widget build(BuildContext context) {
@@ -143,10 +160,10 @@ class SentMessage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: [
-            Text("K, I'm on my way", style: TextStyle(color: Colors.white),),
+            Text(this.message, style: TextStyle(color: Colors.white),),
             
             SizedBox(height: 4,),
-            Text("09:45", style: TextStyle(color: Colors.white),)
+            Text(this.timestamp.toIso8601String(), style: TextStyle(color: Colors.white),)
           ],
         ),
       ),

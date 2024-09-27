@@ -1,1 +1,30 @@
-{"flutter":{"platforms":{"android":{"default":{"projectId":"chat-fatec-4eb48","appId":"1:965365924771:android:483601697bd190a5801016","fileOutput":"android/app/google-services.json"}},"dart":{"lib/firebase_options.dart":{"projectId":"chat-fatec-4eb48","configurations":{"android":"1:965365924771:android:483601697bd190a5801016","web":"1:965365924771:web:c50be2f91b072cce801016"}}}}}}
+{
+  "flutter": {
+    "platforms": {
+      "android": {
+        "default": {
+          "projectId": "chat-fatec-4eb48",
+          "appId": "1:965365924771:android:483601697bd190a5801016",
+          "fileOutput": "android/app/google-services.json"
+        }
+      },
+      "dart": {
+        "lib/firebase_options.dart": {
+          "projectId": "chat-fatec-4eb48",
+          "configurations": {
+            "android": "1:965365924771:android:483601697bd190a5801016",
+            "web": "1:965365924771:web:c50be2f91b072cce801016"
+          }
+        }
+      }
+    }
+  },
+  "hosting": {
+    "public": "build/web",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
+}

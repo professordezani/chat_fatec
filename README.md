@@ -22,8 +22,5 @@ https://firebase.google.com/docs/app-distribution/android/distribute-cli?hl=pt-b
 
 
 ```
-firebase appdistribution:distribute test.apk  \
-    --app 1:965365924771:android:483601697bd190a5801016 \
-    --release-notes "New version" \
-    --testers-file testers.txt
+firebase appdistribution:distribute build\app\outputs\flutter-apk\app-release.apk --app 1:965365924771:android:483601697bd190a5801016 --release-notes "New version" --testers-file testers.txt
 ```

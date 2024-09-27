@@ -18,7 +18,7 @@ class LoginPage extends StatelessWidget {
           password: txtPassword.text,
         );
 
-      Navigator.pushReplacementNamed(context, '/chats');
+      // Navigator.pushReplacementNamed(context, '/chats');
     }
     on FirebaseAuthException catch (ex) {
       var snackBar = SnackBar(

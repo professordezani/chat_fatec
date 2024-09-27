@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'login.page.dart';
 import 'newaccount.page.dart';
@@ -19,7 +20,16 @@ class ChatFatecApp extends StatelessWidget {
         "/chats":(context) => ChatsPage(),
         "/chat":(context) => ChatPage(),
       },
-      initialRoute: "/login",
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, AsyncSnapshot<User?> snapshot) {
+           if (snapshot.connectionState == ConnectionState.active) {
+             return snapshot.data == null ? LoginPage() : ChatsPage();
+           } else {
+             return LoginPage();
+           }
+        },)
+      // initialRoute: "/login",
     );
   }
 }
