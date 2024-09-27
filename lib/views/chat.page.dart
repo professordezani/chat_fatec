@@ -1,9 +1,30 @@
 // ignore_for_file: prefer_const_constructors, use_key_in_widget_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ChatPage extends StatelessWidget {
+  final txtMessage = TextEditingController();
+  final user = FirebaseAuth.instance.currentUser!;
+  final firestore = FirebaseFirestore.instance;
+
+  Future<void> sendMessage() async {
+
+    var doc = {
+      "uid": user.uid,
+      "displayName": user.displayName,
+      "timestamp": FieldValue.serverTimestamp(),
+      "type": "text",
+      "message": txtMessage.text
+    };
+
+    await firestore.collection('messages').add(doc);
+
+    txtMessage.clear();
+
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,17 +65,21 @@ class ChatPage extends StatelessWidget {
                         color: Color(0xFFF7F7FC),
                       ),
                       child: TextField(
+                        controller: txtMessage,
                         maxLines: 5,
                         minLines: 1,
                         decoration: InputDecoration(
                           border: InputBorder.none,
-                          hintText: "Good morning",
+                          hintText: "Type your message...",
                           hintStyle: TextStyle(fontSize: 14, color: Color(0xFF0F1828),)
                         ),
                       ),
                     ),
                   ),
-                  IconButton(onPressed: () {}, icon: Icon(CupertinoIcons.paperplane_fill, color: Color(0xFF002DE3)),),
+                  IconButton(
+                    onPressed: () => sendMessage(),
+                    icon: Icon(CupertinoIcons.paperplane_fill, color: Color(0xFF002DE3),)
+                  ),
                 ],
               ),
             ),
